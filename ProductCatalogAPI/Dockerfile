@@ -1,14 +1,12 @@
 FROM microsoft/dotnet:2.1-aspnetcore-runtime-stretch-slim AS base
 WORKDIR /app
 EXPOSE 80
-
+ 
 FROM microsoft/dotnet:2.1-sdk-stretch AS build
 WORKDIR /src
-COPY ["ProductCatalogAPI/ProductCatalogAPI.csproj", "ProductCatalogAPI/"]
-RUN dotnet restore "ProductCatalogAPI/ProductCatalogAPI.csproj"
-COPY . .
-WORKDIR "/src/ProductCatalogAPI"
-RUN dotnet build "ProductCatalogAPI.csproj" -c Release -o /app
+COPY . ./
+RUN dotnet restore ProductCatalogAPI.csproj
+
 
 FROM build AS publish
 RUN dotnet publish "ProductCatalogAPI.csproj" -c Release -o /app
