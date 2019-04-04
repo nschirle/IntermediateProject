@@ -5,7 +5,7 @@ EXPOSE 80
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
 COPY . ./
-RUN dotnet restore "WebMvc/WebMvc.csproj"
+RUN dotnet restore "WebMvc.csproj"
 
 FROM build AS publish
 RUN dotnet publish "WebMvc.csproj" -c Release -o /app
